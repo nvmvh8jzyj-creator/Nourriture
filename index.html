@@ -8,121 +8,124 @@
 <title>Meal Prep Vegan</title>
 <style>
 :root {
-  --primary: #2d6a4f;
-  --primary-light: #e8f5e9;
-  --accent: #d8f3dc;
-  --bg: #f4f6f8;
+  --primary: #2b6cb0;
+  --primary-bg: #ebf8ff;
+  --accent: #319795;
+  --accent-light: #e6fffa;
+  --bg: #f7fafc;
   --card: #ffffff;
-  --text: #1b4332;
-  --text-dark: #081c15;
-  --text-muted: #6c757d;
-  --border: #edf2f4;
-  --badge-lunch: #ffb703;
+  --text: #2d3748;
+  --text-muted: #718096;
+  --border: #e2e8f0;
+  --danger: #e53e3e;
+  --star: #ecc94b;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; }
-body { background-color: var(--bg); color: var(--text-dark); padding-bottom: 90px; }
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif; }
+body { background-color: var(--bg); color: var(--text); padding-bottom: 95px; }
 
-/* Header */
-header { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 45px 20px 15px; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border); }
-header h1 { font-size: 24px; font-weight: 800; color: var(--primary); letter-spacing: -0.5px; }
+/* Header Premium */
+header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 40px 20px 14px; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border); }
+header h1 { font-size: 22px; font-weight: 800; color: #1a202c; letter-spacing: -0.5px; display: flex; align-items: center; gap: 8px; }
 header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 
-/* Main Navigation */
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 70px; background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; }
-.nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--text-muted); font-size: 11px; font-weight: 500; cursor: pointer; flex: 1; }
-.nav-btn.active { color: var(--primary); font-weight: 700; }
+/* Navigation iPhone Style */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 72px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; }
+.nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 3px; color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; flex: 1; }
+.nav-btn.active { color: var(--accent); }
 .nav-icon { font-size: 22px; }
 
-/* Sections */
-.section { display: none; padding: 16px; animation: fadeIn 0.25s ease-in-out; }
+/* Sections & Cards */
+.section { display: none; padding: 16px; animation: fadeIn 0.2s ease-out; }
 .section.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-/* Cards */
-.card { background: var(--card); border-radius: 20px; padding: 18px; margin-bottom: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid var(--border); }
-.card-title { font-size: 17px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
-.card-subtitle { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; line-height: 1.3; }
+.card { background: var(--card); border-radius: 22px; padding: 18px; margin-bottom: 16px; box-shadow: 0 8px 25px rgba(0,0,0,0.04); border: 1px solid var(--border); overflow: hidden; }
+.card-title { font-size: 17px; font-weight: 700; color: #1a202c; margin-bottom: 4px; display: flex; justify-content: space-between; align-items: center; }
+.card-subtitle { font-size: 12px; color: var(--text-muted); margin-bottom: 14px; }
 
-/* Pantry Grid & Custom Add */
+/* Ingrédients / Frigo */
 .pantry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 12px; }
-.pantry-item { border: 1.5px solid var(--border); border-radius: 14px; padding: 10px 14px; display: flex; align-items: center; justify-content: space-between; font-size: 14px; background: #fff; cursor: pointer; font-weight: 500; transition: all 0.2s; }
-.pantry-item.selected { border-color: var(--primary); background: var(--primary-light); color: var(--primary); font-weight: 600; }
+.pantry-item { border: 1.5px solid var(--border); border-radius: 14px; padding: 12px; display: flex; align-items: center; justify-content: space-between; font-size: 13px; background: #fff; cursor: pointer; font-weight: 600; transition: all 0.2s; }
+.pantry-item.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
 
-.add-input-group { display: flex; gap: 8px; margin-top: 10px; }
-.add-input-group input { flex: 1; border: 1.5px solid var(--border); border-radius: 12px; padding: 12px; font-size: 14px; outline: none; background: var(--bg); }
-.add-input-group input:focus { border-color: var(--primary); background: #fff; }
-.add-btn { background: var(--primary); color: white; border: none; border-radius: 12px; padding: 0 16px; font-weight: 600; cursor: pointer; font-size: 18px; }
+/* Input Groups */
+.input-group { display: flex; gap: 8px; margin-top: 10px; }
+.input-group input { flex: 1; border: 1.5px solid var(--border); border-radius: 14px; padding: 12px; font-size: 14px; outline: none; background: #fff; }
+.input-group input:focus { border-color: var(--accent); }
+.btn-add { background: var(--accent); color: white; border: none; border-radius: 14px; padding: 0 18px; font-weight: 700; cursor: pointer; font-size: 18px; }
 
-/* Configurator per Day */
+/* Configuration Jours */
 .day-config { border-bottom: 1px solid var(--border); padding-bottom: 14px; margin-bottom: 14px; }
 .day-config:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 .day-title { font-weight: 700; font-size: 15px; }
-
-.mode-select { font-size: 12px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-weight: 600; color: var(--text); }
-
+.mode-select { font-size: 12px; padding: 6px 10px; border-radius: 10px; border: 1px solid var(--border); background: var(--bg); font-weight: 600; }
 .meal-checks { display: flex; gap: 8px; margin-top: 6px; }
 .meal-check { flex: 1; text-align: center; padding: 8px; border-radius: 10px; border: 1px solid var(--border); font-size: 12px; font-weight: 600; cursor: pointer; background: var(--bg); color: var(--text-muted); }
-.meal-check.active { background: var(--accent); color: var(--primary); border-color: var(--primary); }
+.meal-check.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
 
-/* Buttons */
-.btn { width: 100%; padding: 16px; border-radius: 16px; border: none; background: var(--primary); color: white; font-size: 16px; font-weight: 700; cursor: pointer; text-align: center; box-shadow: 0 4px 12px rgba(45, 106, 79, 0.25); }
+/* Recettes et Cartes */
+.meal-card { background: #fff; border-radius: 18px; border: 1px solid var(--border); margin-bottom: 14px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+.meal-img { width: 100%; height: 140px; object-fit: cover; }
+.meal-content { padding: 14px; }
+.meal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.meal-type { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 0.5px; }
+.meal-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.fav-btn { background: none; border: none; font-size: 18px; cursor: pointer; }
 
-/* Meal Card Display */
-.meal-card { background: var(--bg); border-radius: 14px; padding: 12px; margin-top: 8px; }
-.meal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-.meal-type { font-size: 11px; font-weight: 800; text-transform: uppercase; color: var(--primary); letter-spacing: 0.5px; }
-.meal-name { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-.badge-gamelle { background: #fff3cd; color: #856404; font-size: 10px; padding: 2px 8px; border-radius: 8px; font-weight: 700; margin-left: 6px; }
-
-.recipe-toggle { font-size: 12px; color: var(--primary); font-weight: 600; background: none; border: none; margin-top: 6px; cursor: pointer; display: block; }
-.recipe-details { display: none; margin-top: 8px; padding-top: 8px; border-top: 1px dashed #ccc; font-size: 13px; line-height: 1.4; color: #333; }
+.recipe-details { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 13px; line-height: 1.5; }
 .recipe-details.open { display: block; }
 
-/* Shopping List */
-.shop-list { list-style: none; }
-.shop-item { padding: 14px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 500; }
-.shop-item.checked { text-decoration: line-through; opacity: 0.35; }
+/* Ratings / Review Module */
+.review-box { background: var(--bg); border-radius: 12px; padding: 12px; margin-top: 10px; }
+.stars { display: flex; gap: 4px; font-size: 18px; cursor: pointer; margin: 4px 0 8px; }
+.star { color: #cbd5e0; }
+.star.active { color: var(--star); }
+.review-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 8px; font-size: 12px; margin-top: 6px; }
+
+/* Checklist Courses */
+.shop-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.shop-item.checked span { text-decoration: line-through; opacity: 0.4; }
+.checkbox { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+.shop-item.checked .checkbox { background: var(--accent); border-color: var(--accent); color: white; }
+
+/* Boutons */
+.btn { width: 100%; padding: 16px; border-radius: 16px; border: none; background: var(--accent); color: white; font-size: 15px; font-weight: 700; cursor: pointer; text-align: center; box-shadow: 0 4px 14px rgba(49, 151, 149, 0.3); }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>Meal Prep Vegan</h1>
-  <p>Anti-gaspi · Déficit calorique · Sur-mesure</p>
+  <h1>🥗 Meal Prep Vegan</h1>
+  <p>Déficit calorique · Anti-gaspillage</p>
 </header>
 
 <!-- SECTION 1: FRIGO -->
 <div id="pantry" class="section active">
   <div class="card">
-    <div class="card-title">J'ai déjà chez moi 🍏</div>
-    <div class="card-subtitle">Coche tes ingrédients pour éviter les achats inutiles.</div>
-    
+    <div class="card-title">Dans mon frigo / placard 🥑</div>
+    <div class="card-subtitle">Coche ce que tu as déjà. Le plan s'adapte automatiquement.</div>
     <div class="pantry-grid" id="pantryGrid"></div>
-
-    <div class="add-input-group">
-      <input type="text" id="customIngredient" placeholder="Ajouter un ingrédient...">
-      <button class="add-btn" onclick="addCustomIngredient()">+</button>
+    <div class="input-group">
+      <input type="text" id="customIngredient" placeholder="Ajouter un élément au frigo...">
+      <button class="btn-add" onclick="addCustomIngredient()">+</button>
     </div>
   </div>
-
-  <button class="btn" onclick="switchTab('config', document.querySelectorAll('.nav-btn')[1])">Configurer mes jours →</button>
+  <button class="btn" onclick="switchTab('config', document.querySelectorAll('.nav-btn')[1])">Étape suivante : Configurer les jours →</button>
 </div>
 
-<!-- SECTION 2: CONFIGURATION DES JOURS -->
+<!-- SECTION 2: CONFIGURATION JOURS -->
 <div id="config" class="section">
   <div class="card">
     <div class="card-title">Organisation de la semaine 📅</div>
-    <div class="card-subtitle">Choisis tes jours, tes repas et ton mode (Maison / Télétravail / Gamelle).</div>
-    
+    <div class="card-subtitle">Choisis tes jours de présences et tes repas à planifier.</div>
     <div id="daysConfigContainer"></div>
   </div>
-
-  <button class="btn" onclick="generateAndShowPlan()">Générer le planning ✨</button>
+  <button class="btn" onclick="generateAndShowPlan()">Générer mon planning ✨</button>
 </div>
 
-<!-- SECTION 3: PLANNING -->
+<!-- SECTION 3: PLANNING & RECETTES -->
 <div id="plan" class="section">
   <div id="planContainer"></div>
 </div>
@@ -130,13 +133,19 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 <!-- SECTION 4: COURSES -->
 <div id="shopping" class="section">
   <div class="card">
-    <div class="card-title">Liste de courses 🛒</div>
-    <div class="card-subtitle">Seulement ce qu'il te manque pour tes repas.</div>
-    <ul class="shop-list" id="shoppingList"></ul>
+    <div class="card-title">Acheter pour la semaine 🛒</div>
+    <div class="card-subtitle">Coche les articles au fur et à mesure de tes courses.</div>
+    
+    <div class="input-group" style="margin-bottom: 16px;">
+      <input type="text" id="customShopItem" placeholder="Ajouter un produit (ex: café, sopalin)...">
+      <button class="btn-add" onclick="addManualShopItem()">+</button>
+    </div>
+
+    <div id="shoppingList"></div>
   </div>
 </div>
 
-<!-- NAVIGATION iOS -->
+<!-- NAVIGATION BAS -->
 <div class="bottom-nav">
   <button class="nav-btn active" onclick="switchTab('pantry', this)">
     <span class="nav-icon">🥗</span>
@@ -144,10 +153,10 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   </button>
   <button class="nav-btn" onclick="switchTab('config', this)">
     <span class="nav-icon">⚙️</span>
-    <span>Jours & Repas</span>
+    <span>Jours</span>
   </button>
   <button class="nav-btn" onclick="switchTab('plan', this)">
-    <span class="nav-icon">📅</span>
+    <span class="nav-icon">📖</span>
     <span>Planning</span>
   </button>
   <button class="nav-btn" onclick="switchTab('shopping', this)">
@@ -159,45 +168,55 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 <script>
 const DAYS = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
 
-let pantryItems = [
+const DEFAULT_PANTRY = [
   { id: "aubergine", name: "Aubergine" },
   { id: "epinards", name: "Épinards" },
   { id: "pois_chiches", name: "Pois chiches" },
   { id: "lentilles", name: "Lentilles" },
-  { id: "tofu", name: "Tofu" },
-  { id: "riz", name: "Riz" },
+  { id: "tofu", name: "Tofu ferme" },
+  { id: "riz", name: "Riz complet" },
   { id: "avocat", name: "Avocat" },
   { id: "avoine", name: "Flocons d'avoine" },
   { id: "banane", name: "Banane" }
 ];
 
-let selectedPantry = {};
-
-// Config par jour
-let daysConfig = DAYS.map(day => ({
-  name: day,
-  enabled: true,
-  mode: "teletravail", // teletravail, bureau, maison
-  meals: { matin: true, midi: true, soir: true }
-}));
-
 const RECIPES = {
   matin: [
-    { name: "Porridge Avoine & Banane", cal: "~310 kcal", needs: ["avoine", "banane"], prep: "Cuire 40g d'avoine avec de l'eau ou du lait végétal. Trancher la banane dessus." },
-    { name: "Toast Avocat & Graines", cal: "~290 kcal", needs: ["avocat"], prep: "Écraser 1/2 avocat sur du pain complet toasté, saler et poivrer." }
+    { id: "m1", name: "Porridge Avoine & Banane", cal: "~310 kcal", needs: ["avoine", "banane"], img: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=600&q=80", prep: "Cuire 40g d'avoine avec de l'eau ou lait végétal. Servir avec la banane coupée." },
+    { id: "m2", name: "Toast Avocat & Graines", cal: "~290 kcal", needs: ["avocat"], img: "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=600&q=80", prep: "Écraser 1/2 avocat sur du pain complet grillé. Ajouter sel, poivre et jus de citron." }
   ],
   midi: [
-    { name: "Bowl Épinards, Pois Chiches & Avocat", cal: "~380 kcal", needs: ["epinards", "pois_chiches", "avocat"], prep: "Mélanger 1/2 boîte de pois chiches, épinards frais et 1/2 avocat. Citronnette légère." },
-    { name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", needs: ["tofu", "aubergine", "riz"], prep: "Rôtir tofu et aubergine à la poêle. Servir avec une portion de riz complet." }
+    { id: "l1", name: "Bowl Épinards & Pois Chiches", cal: "~380 kcal", needs: ["epinards", "pois_chiches", "avocat"], img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80", prep: "Associer épinards frais, 1/2 boîte de pois chiches rincés et 1/2 avocat tranche." },
+    { id: "l2", name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", needs: ["tofu", "aubergine", "riz"], img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80", prep: "Saisir le tofu et les dés d'aubergine avec un filet de sauce soja. Déguster avec le riz." }
   ],
   soir: [
-    { name: "Curry de Lentilles & Épinards", cal: "~350 kcal", needs: ["lentilles", "epinards"], prep: "Faire réduire les lentilles avec les épinards, épices curry et un peu de coulis de tomate." },
-    { name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", needs: ["aubergine", "pois_chiches"], prep: "Saisir la seconde moitié de l'aubergine avec le reste des pois chiches." }
+    { id: "d1", name: "Curry de Lentilles & Épinards", cal: "~350 kcal", needs: ["lentilles", "epinards"], img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80", prep: "Faire mijoter lentilles et épinards avec de la sauce tomate et des épices curry." },
+    { id: "d2", name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", needs: ["aubergine", "pois_chiches"], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80", prep: "Griller l'autre moitié de l'aubergine avec le reste des pois chiches à la poêle." }
   ]
 };
 
-let generatedPlan = [];
+// State + Storage
+let pantryItems = JSON.parse(localStorage.getItem('pantryItems')) || DEFAULT_PANTRY;
+let selectedPantry = JSON.parse(localStorage.getItem('selectedPantry')) || {};
+let daysConfig = JSON.parse(localStorage.getItem('daysConfig')) || DAYS.map(day => ({
+  name: day, enabled: true, mode: "teletravail", meals: { matin: true, midi: true, soir: true }
+}));
+let manualShopItems = JSON.parse(localStorage.getItem('manualShopItems')) || [];
+let checkedShopItems = JSON.parse(localStorage.getItem('checkedShopItems')) || {};
+let recipeReviews = JSON.parse(localStorage.getItem('recipeReviews')) || {};
+let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
 
+function saveData() {
+  localStorage.setItem('pantryItems', JSON.stringify(pantryItems));
+  localStorage.setItem('selectedPantry', JSON.stringify(selectedPantry));
+  localStorage.setItem('daysConfig', JSON.stringify(daysConfig));
+  localStorage.setItem('manualShopItems', JSON.stringify(manualShopItems));
+  localStorage.setItem('checkedShopItems', JSON.stringify(checkedShopItems));
+  localStorage.setItem('recipeReviews', JSON.stringify(recipeReviews));
+  localStorage.setItem('favorites', JSON.stringify(favorites));
+}
+
+// 1. Frigo
 function renderPantry() {
   const grid = document.getElementById('pantryGrid');
   grid.innerHTML = pantryItems.map(item => `
@@ -210,7 +229,9 @@ function renderPantry() {
 
 function togglePantry(id) {
   selectedPantry[id] = !selectedPantry[id];
+  saveData();
   renderPantry();
+  renderShopping(); // Mise à jour dynamique
 }
 
 function addCustomIngredient() {
@@ -218,30 +239,32 @@ function addCustomIngredient() {
   const val = input.value.trim();
   if(!val) return;
   const id = 'custom_' + Date.now();
-  pantryItems.push({ id: id, name: val });
+  pantryItems.push({ id, name: val });
   selectedPantry[id] = true;
   input.value = '';
+  saveData();
   renderPantry();
+  renderShopping();
 }
 
+// 2. Configuration Jours
 function renderDaysConfig() {
   const container = document.getElementById('daysConfigContainer');
   container.innerHTML = daysConfig.map((d, idx) => `
     <div class="day-config">
       <div class="day-head">
         <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
-          <input type="checkbox" ${d.enabled ? 'checked' : ''} onchange="toggleDay(${idx})" style="accent-color:var(--primary); transform:scale(1.2);">
+          <input type="checkbox" ${d.enabled ? 'checked' : ''} onchange="toggleDay(${idx})" style="accent-color:var(--accent);">
           <span class="day-title">${d.name}</span>
         </label>
         ${d.enabled ? `
           <select class="mode-select" onchange="changeDayMode(${idx}, this.value)">
             <option value="teletravail" ${d.mode === 'teletravail' ? 'selected' : ''}>🏡 Télétravail</option>
             <option value="bureau" ${d.mode === 'bureau' ? 'selected' : ''}>💼 Bureau (Gamelle)</option>
-            <option value="maison" ${d.mode === 'maison' ? 'selected' : ''}>🌴 Repos / Maison</option>
+            <option value="maison" ${d.mode === 'maison' ? 'selected' : ''}>🌴 Maison</option>
           </select>
         ` : ''}
       </div>
-
       ${d.enabled ? `
         <div class="meal-checks">
           <div class="meal-check ${d.meals.matin ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'matin')">Matin</div>
@@ -253,95 +276,101 @@ function renderDaysConfig() {
   `).join('');
 }
 
-function toggleDay(idx) {
-  daysConfig[idx].enabled = !daysConfig[idx].enabled;
-  renderDaysConfig();
-}
+function toggleDay(idx) { daysConfig[idx].enabled = !daysConfig[idx].enabled; saveData(); renderDaysConfig(); }
+function changeDayMode(idx, mode) { daysConfig[idx].mode = mode; saveData(); }
+function toggleDayMeal(idx, meal) { daysConfig[idx].meals[meal] = !daysConfig[idx].meals[meal]; saveData(); renderDaysConfig(); }
 
-function changeDayMode(idx, mode) {
-  daysConfig[idx].mode = mode;
-}
-
-function toggleDayMeal(idx, meal) {
-  daysConfig[idx].meals[meal] = !daysConfig[idx].meals[meal];
-  renderDaysConfig();
-}
-
+// 3. Generation & Planning
 function generateAndShowPlan() {
-  generatePlan();
-  const navBtn = document.querySelectorAll('.nav-btn')[2];
-  switchTab('plan', navBtn);
-}
-
-function generatePlan() {
-  generatedPlan = [];
-
-  daysConfig.filter(d => d.enabled).forEach((d, i) => {
-    let dayData = { name: d.name, mode: d.mode, meals: [] };
-
-    if (d.meals.matin) {
-      dayData.meals.push({ type: "Matin", ...RECIPES.matin[i % RECIPES.matin.length] });
-    }
-    if (d.meals.midi) {
-      dayData.meals.push({ type: "Midi", isGamelle: d.mode === 'bureau', ...RECIPES.midi[i % RECIPES.midi.length] });
-    }
-    if (d.meals.soir) {
-      dayData.meals.push({ type: "Soir", ...RECIPES.soir[i % RECIPES.soir.length] });
-    }
-
-    generatedPlan.push(dayData);
-  });
-
   renderPlan();
   renderShopping();
+  switchTab('plan', document.querySelectorAll('.nav-btn')[2]);
 }
 
 function renderPlan() {
   const container = document.getElementById('planContainer');
-  if(generatedPlan.length === 0) {
-    container.innerHTML = `<div class="card"><div class="card-title">Aucun jour sélectionné</div><div class="card-subtitle">Active au moins un jour dans l'onglet Config.</div></div>`;
-    return;
-  }
+  let html = '';
 
-  container.innerHTML = generatedPlan.map((d, dIdx) => `
-    <div class="card">
-      <div class="card-title" style="color:var(--primary); flex; justify-content:space-between;">
-        ${d.name}
-        <span style="font-size:12px; font-weight:normal; color:var(--text-muted);">
-          ${d.mode === 'bureau' ? '💼 Bureau' : d.mode === 'teletravail' ? '🏡 Télétravail' : '🌴 Maison'}
-        </span>
-      </div>
-      ${d.meals.map((m, mIdx) => `
-        <div class="meal-card">
-          <div class="meal-header">
-            <span class="meal-type">
-              ${m.type}
-              ${m.isGamelle ? '<span class="badge-gamelle">🍱 Gamelle</span>' : ''}
-            </span>
-            <span style="font-size:12px; color:var(--text-muted);">${m.cal}</span>
+  daysConfig.filter(d => d.enabled).forEach((d, dIdx) => {
+    html += `<div class="card"><div class="card-title">${d.name} <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">${d.mode === 'bureau' ? '💼 Gamelle' : '🏡 Maison'}</span></div>`;
+    
+    ['matin', 'midi', 'soir'].forEach(mType => {
+      if(d.meals[mType]) {
+        const recipeList = RECIPES[mType];
+        const recipe = recipeList[dIdx % recipeList.length];
+        const isFav = favorites[recipe.id];
+        const review = recipeReviews[recipe.id] || { rating: 0, text: '' };
+
+        html += `
+          <div class="meal-card">
+            <img src="${recipe.img}" class="meal-img" alt="${recipe.name}">
+            <div class="meal-content">
+              <div class="meal-header">
+                <span class="meal-type">${mType} ${d.mode === 'bureau' && mType === 'midi' ? '• 🍱 Gamelle' : ''}</span>
+                <button class="fav-btn" onclick="toggleFav('${recipe.id}')">${isFav ? '❤️' : '🤍'}</button>
+              </div>
+              <div class="meal-name">${recipe.name}</div>
+              <div style="font-size:12px; color:var(--text-muted);">${recipe.cal}</div>
+              <button class="btn" style="padding:8px; font-size:12px; margin-top:8px; background:var(--bg); color:var(--text);" onclick="toggleRecipe('rec-${dIdx}-${mType}')">Recette & Notes ▾</button>
+              
+              <div class="recipe-details" id="rec-${dIdx}-${mType}">
+                <p><strong>Préparation :</strong> ${recipe.prep}</p>
+
+                <!-- Zone de notation -->
+                <div class="review-box">
+                  <strong>Ton avis sur cette recette :</strong>
+                  <div class="stars">
+                    ${[1,2,3,4,5].map(star => `
+                      <span class="star ${review.rating >= star ? 'active' : ''}" onclick="rateRecipe('${recipe.id}', ${star})">★</span>
+                    `).join('')}
+                  </div>
+                  <input type="text" class="review-input" placeholder="Remarques (goût, temps, facilité...)" value="${review.text || ''}" onchange="saveReviewText('${recipe.id}', this.value)">
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="meal-name">${m.name}</div>
-          <button class="recipe-toggle" onclick="toggleRecipe(${dIdx}, ${mIdx})">Recette & Préparation ▾</button>
-          <div class="recipe-details" id="recipe-${dIdx}-${mIdx}">${m.prep}</div>
-        </div>
-      `).join('')}
-    </div>
-  `).join('');
+        `;
+      }
+    });
+
+    html += `</div>`;
+  });
+
+  container.innerHTML = html || `<div class="card"><div class="card-title">Aucun jour sélectionné.</div></div>`;
 }
 
-function toggleRecipe(dIdx, mIdx) {
-  const el = document.getElementById(`recipe-${dIdx}-${mIdx}`);
-  el.classList.toggle('open');
+function toggleRecipe(id) { document.getElementById(id).classList.toggle('open'); }
+
+function toggleFav(id) {
+  favorites[id] = !favorites[id];
+  saveData();
+  renderPlan();
 }
 
+function rateRecipe(id, rating) {
+  if(!recipeReviews[id]) recipeReviews[id] = {};
+  recipeReviews[id].rating = rating;
+  saveData();
+  renderPlan();
+}
+
+function saveReviewText(id, text) {
+  if(!recipeReviews[id]) recipeReviews[id] = {};
+  recipeReviews[id].text = text;
+  saveData();
+}
+
+// 4. Liste de Courses
 function renderShopping() {
-  const list = document.getElementById('shoppingList');
+  const container = document.getElementById('shoppingList');
   const needed = {};
 
-  generatedPlan.forEach(d => {
-    d.meals.forEach(m => {
-      if(m.needs) {
-        m.needs.forEach(req => {
+  // Calcul automatique basé sur le plan et le frigo
+  daysConfig.filter(d => d.enabled).forEach((d, dIdx) => {
+    ['matin', 'midi', 'soir'].forEach(mType => {
+      if(d.meals[mType]) {
+        const recipe = RECIPES[mType][dIdx % RECIPES[mType].length];
+        recipe.needs.forEach(req => {
           if (!selectedPantry[req]) {
             needed[req] = true;
           }
@@ -350,23 +379,49 @@ function renderShopping() {
     });
   });
 
-  const keys = Object.keys(needed);
-  if (keys.length === 0) {
-    list.innerHTML = `<li class="shop-item">Rien à acheter, tout est déjà dans ton frigo ! 🎉</li>`;
+  let itemsToBuy = Object.keys(needed).map(k => {
+    const item = pantryItems.find(p => p.id === k);
+    return { id: k, name: item ? item.name : k };
+  });
+
+  // Ajouter items manuels
+  manualShopItems.forEach(item => {
+    itemsToBuy.push({ id: item.id, name: item.name });
+  });
+
+  if(itemsToBuy.length === 0) {
+    container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted);">Ton frigo contient déjà tout le nécessaire ! 🎉</div>`;
     return;
   }
 
-  list.innerHTML = keys.map(k => {
-    const item = pantryItems.find(p => p.id === k);
+  container.innerHTML = itemsToBuy.map(item => {
+    const isChecked = checkedShopItems[item.id];
     return `
-      <li class="shop-item" onclick="this.classList.toggle('checked')">
-        <span>${item ? item.name : k}</span>
-        <span style="color:var(--primary); font-size:13px; font-weight:600;">À acheter</span>
-      </li>
+      <div class="shop-item ${isChecked ? 'checked' : ''}" onclick="toggleShopCheck('${item.id}')">
+        <div class="checkbox">${isChecked ? '✓' : ''}</div>
+        <span>${item.name}</span>
+      </div>
     `;
   }).join('');
 }
 
+function toggleShopCheck(id) {
+  checkedShopItems[id] = !checkedShopItems[id];
+  saveData();
+  renderShopping();
+}
+
+function addManualShopItem() {
+  const input = document.getElementById('customShopItem');
+  const val = input.value.trim();
+  if(!val) return;
+  manualShopItems.push({ id: 'manual_' + Date.now(), name: val });
+  input.value = '';
+  saveData();
+  renderShopping();
+}
+
+// Navigation
 function switchTab(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
@@ -374,9 +429,11 @@ function switchTab(id, btn) {
   if(btn) btn.classList.add('active');
 }
 
-// Initialisation
+// Init
 renderPantry();
 renderDaysConfig();
+renderPlan();
+renderShopping();
 </script>
 </body>
 </html>
