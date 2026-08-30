@@ -17,82 +17,85 @@
   --text-muted: #718096;
   --border: #e2e8f0;
   --star: #ecc94b;
+  --danger: #e53e3e;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, sans-serif; }
 body { background-color: var(--bg); color: var(--text); padding-bottom: 85px; }
 
 header { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); padding: 35px 16px 10px; position: sticky; top: 0; z-index: 90; border-bottom: 1px solid var(--border); }
-header h1 { font-size: 20px; font-weight: 800; color: #1a202c; letter-spacing: -0.3px; }
-header p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+header h1 { font-size: 19px; font-weight: 800; color: #1a202c; }
+header p { font-size: 11px; color: var(--text-muted); margin-top: 1px; }
 
-.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; }
-.nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--text-muted); font-size: 10px; font-weight: 600; cursor: pointer; flex: 1; }
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border-top: 1px solid var(--border); display: flex; justify-content: space-around; align-items: center; z-index: 100; }
+.nav-btn { background: none; border: none; display: flex; flex-direction: column; align-items: center; gap: 2px; color: var(--text-muted); font-size: 9px; font-weight: 600; cursor: pointer; flex: 1; }
 .nav-btn.active { color: var(--accent); }
-.nav-icon { font-size: 20px; }
+.nav-icon { font-size: 18px; }
 
 .section { display: none; padding: 12px; animation: fadeIn 0.15s ease-out; }
 .section.active { display: block; }
 @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
 
-.card { background: var(--card); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); border: 1px solid var(--border); }
+.card { background: var(--card); border-radius: 16px; padding: 14px; margin-bottom: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); border: 1px solid var(--border); }
 .card-title { font-size: 15px; font-weight: 700; color: #1a202c; margin-bottom: 2px; display: flex; justify-content: space-between; align-items: center; }
 .card-subtitle { font-size: 11px; color: var(--text-muted); margin-bottom: 10px; }
 
-/* Grid Frigo Épurée */
-.pantry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 10px; }
-.pantry-item { border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; background: #fff; cursor: pointer; font-weight: 600; }
+/* Ingrédients Frigo */
+.pantry-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; margin-bottom: 10px; }
+.pantry-item { border: 1px solid var(--border); border-radius: 8px; padding: 8px; display: flex; align-items: center; justify-content: space-between; font-size: 12px; background: #fff; cursor: pointer; font-weight: 600; }
 .pantry-item.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
 
 .input-group { display: flex; gap: 6px; margin-top: 8px; }
-.input-group input { flex: 1; border: 1px solid var(--border); border-radius: 10px; padding: 8px 10px; font-size: 13px; outline: none; background: #fff; }
-.btn-add { background: var(--accent); color: white; border: none; border-radius: 10px; padding: 0 14px; font-weight: 700; cursor: pointer; font-size: 16px; }
+.input-group input, .input-group select { border: 1px solid var(--border); border-radius: 8px; padding: 8px; font-size: 12px; outline: none; background: #fff; }
+.input-group input { flex: 1; }
+.btn-add { background: var(--accent); color: white; border: none; border-radius: 8px; padding: 0 12px; font-weight: 700; cursor: pointer; font-size: 15px; }
 
-.day-config { border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-bottom: 10px; }
-.day-config:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-.day-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
-.day-title { font-weight: 700; font-size: 14px; }
-.mode-select { font-size: 11px; padding: 4px 8px; border-radius: 8px; border: 1px solid var(--border); background: var(--bg); font-weight: 600; }
-.meal-checks { display: flex; gap: 6px; margin-top: 4px; }
-.meal-check { flex: 1; text-align: center; padding: 6px; border-radius: 8px; border: 1px solid var(--border); font-size: 11px; font-weight: 600; cursor: pointer; background: var(--bg); color: var(--text-muted); }
-.meal-check.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+/* Formulaire Nouvelle Recette */
+.form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 8px; }
+.form-group label { font-size: 11px; font-weight: 700; color: var(--text-muted); }
 
-/* Cartes repas horizontales compactes */
-.meal-card { background: #fff; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 8px; overflow: hidden; display: flex; align-items: center; padding: 8px; gap: 10px; }
-.meal-img { width: 75px; height: 75px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-.meal-content { flex: 1; min-width: 0; }
-.meal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; }
-.meal-type { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--accent); letter-spacing: 0.3px; }
-.meal-name { font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.fav-btn { background: none; border: none; font-size: 14px; cursor: pointer; padding: 0; }
+/* Cartes Repas Correctement Alignées (Correction du Bug UI) */
+.meal-card { background: #fff; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 10px; padding: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.02); }
+.meal-top { display: flex; gap: 10px; align-items: flex-start; }
+.meal-img { width: 65px; height: 65px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.meal-info { flex: 1; min-width: 0; }
+.meal-header { display: flex; justify-content: space-between; align-items: center; }
+.meal-type { font-size: 10px; font-weight: 800; text-transform: uppercase; color: var(--accent); }
+.meal-actions { display: flex; gap: 6px; }
+.icon-btn { background: none; border: none; font-size: 13px; cursor: pointer; padding: 0; }
+.meal-name { font-size: 13px; font-weight: 700; line-height: 1.2; margin: 2px 0; }
 
-.nutri-badges { display: flex; gap: 4px; flex-wrap: wrap; margin: 3px 0; }
-.badge { font-size: 9px; font-weight: 700; padding: 2px 5px; border-radius: 4px; background: #edf2f7; color: #4a5568; }
+.nutri-badges { display: flex; gap: 4px; flex-wrap: wrap; margin: 4px 0; }
+.badge { font-size: 8px; font-weight: 700; padding: 2px 4px; border-radius: 4px; background: #edf2f7; color: #4a5568; }
 
-.recipe-details { display: none; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border); font-size: 12px; line-height: 1.4; }
+.meal-bottom-btns { display: flex; justify-content: space-between; align-items: center; margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border); }
+.toggle-btn { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 11px; font-weight: 600; color: var(--text); cursor: pointer; width: 100%; text-align: center; }
+
+.recipe-details { display: none; margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--border); font-size: 11px; line-height: 1.4; }
 .recipe-details.open { display: block; }
 
-.review-box { background: var(--bg); border-radius: 8px; padding: 8px; margin-top: 6px; }
-.stars { display: flex; gap: 2px; font-size: 14px; cursor: pointer; margin: 2px 0 4px; }
+.review-box { background: var(--bg); border-radius: 6px; padding: 6px; margin-top: 6px; }
+.stars { display: flex; gap: 2px; font-size: 13px; cursor: pointer; margin: 2px 0; }
 .star { color: #cbd5e0; }
 .star.active { color: var(--star); }
-.review-input { width: 100%; border: 1px solid var(--border); border-radius: 6px; padding: 5px; font-size: 11px; margin-top: 4px; }
+.review-input { width: 100%; border: 1px solid var(--border); border-radius: 4px; padding: 4px; font-size: 10px; margin-top: 2px; }
 
-.shop-item { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
-.shop-item-left { display: flex; align-items: center; gap: 10px; font-size: 13px; }
+/* Courses */
+.shop-item { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.shop-item-left { display: flex; align-items: center; gap: 8px; font-size: 12px; }
 .shop-item.checked span { text-decoration: line-through; opacity: 0.4; }
-.shop-qty { font-size: 11px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 2px 6px; border-radius: 6px; }
-.checkbox { width: 18px; height: 18px; border-radius: 5px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; }
+.shop-qty { font-size: 10px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 2px 5px; border-radius: 4px; }
+.checkbox { width: 16px; height: 16px; border-radius: 4px; border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; }
 .shop-item.checked .checkbox { background: var(--accent); border-color: var(--accent); color: white; }
 
-.btn { width: 100%; padding: 12px; border-radius: 12px; border: none; background: var(--accent); color: white; font-size: 14px; font-weight: 700; cursor: pointer; text-align: center; box-shadow: 0 2px 8px rgba(49, 151, 149, 0.2); }
+.btn { width: 100%; padding: 11px; border-radius: 10px; border: none; background: var(--accent); color: white; font-size: 13px; font-weight: 700; cursor: pointer; text-align: center; }
 </style>
 </head>
 <body>
 
 <header>
   <h1>🥗 Meal Prep Vegan</h1>
-  <p>Format compact · Zéro gaspi</p>
+  <p>Anti-gaspi · Carnet de recettes</p>
 </header>
 
 <div id="home" class="section active">
@@ -101,20 +104,58 @@ header p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 
 <div id="pantry" class="section">
   <div class="card">
-    <div class="card-title">Dans mon frigo 🥑</div>
-    <div class="card-subtitle">Ingrédients disponibles chez toi.</div>
+    <div class="card-title">Mon Frigo & Placard 🥑</div>
+    <div class="card-subtitle">Sélectionne ou ajoute ce que tu as chez toi.</div>
     <div class="pantry-grid" id="pantryGrid"></div>
     <div class="input-group">
-      <input type="text" id="customIngredient" placeholder="Ajouter un ingrédient...">
+      <input type="text" id="customIngredient" placeholder="Nouvel ingrédient (ex: Soupe, Gaspacho)...">
       <button class="btn-add" onclick="addCustomIngredient()">+</button>
     </div>
+  </div>
+</div>
+
+<div id="recipes" class="section">
+  <div class="card">
+    <div class="card-title">Ajouter une Recette 📝</div>
+    <div class="form-group">
+      <label>Nom du plat</label>
+      <input type="text" id="newRecName" placeholder="Ex: Salade de Quinoa & Tofu" style="border:1px solid var(--border); padding:8px; border-radius:8px; font-size:12px;">
+    </div>
+    <div style="display:flex; gap:6px;">
+      <div class="form-group" style="flex:1;">
+        <label>Moment</label>
+        <select id="newRecType" style="border:1px solid var(--border); padding:8px; border-radius:8px; font-size:12px;">
+          <option value="matin">Matin</option>
+          <option value="midi">Midi</option>
+          <option value="soir">Soir</option>
+        </select>
+      </div>
+      <div class="form-group" style="flex:1;">
+        <label>Calories</label>
+        <input type="text" id="newRecCal" placeholder="~350 kcal" style="border:1px solid var(--border); padding:8px; border-radius:8px; font-size:12px;">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Ingrédients clés (séparés par des virgules)</label>
+      <input type="text" id="newRecIngs" placeholder="ex: quinoa, tofu, epinards" style="border:1px solid var(--border); padding:8px; border-radius:8px; font-size:12px;">
+    </div>
+    <div class="form-group">
+      <label>Instructions rapides</label>
+      <input type="text" id="newRecPrep" placeholder="Préparation en 2 lignes..." style="border:1px solid var(--border); padding:8px; border-radius:8px; font-size:12px;">
+    </div>
+    <button class="btn" onclick="addNewRecipe()">Enregistrer ma recette</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Répertoire des recettes 📖</div>
+    <div id="recipeDirectory"></div>
   </div>
 </div>
 
 <div id="config" class="section">
   <div class="card">
     <div class="card-title">Organisation 📅</div>
-    <div class="card-subtitle">Mode "Bureau" = Restes du dîner la veille.</div>
+    <div class="card-subtitle">Midi "Bureau" = Restes du dîner de la veille.</div>
     <div id="daysConfigContainer"></div>
   </div>
   <button class="btn" onclick="generateAndShowPlan()">Générer le planning ✨</button>
@@ -127,8 +168,8 @@ header p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
 <div id="shopping" class="section">
   <div class="card">
     <div class="card-title">Courses 🛒</div>
-    <div class="card-subtitle">Quantités exactes à acheter.</div>
-    <div class="input-group" style="margin-bottom: 12px;">
+    <div class="card-subtitle">Quantités ajustées pour la semaine.</div>
+    <div class="input-group" style="margin-bottom: 10px;">
       <input type="text" id="customShopItem" placeholder="Produit supplémentaire...">
       <button class="btn-add" onclick="addManualShopItem()">+</button>
     </div>
@@ -145,12 +186,16 @@ header p { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
     <span class="nav-icon">🥗</span>
     <span>Frigo</span>
   </button>
+  <button class="nav-btn" onclick="switchTab('recipes', this)">
+    <span class="nav-icon">📖</span>
+    <span>Recettes</span>
+  </button>
   <button class="nav-btn" onclick="switchTab('config', this)">
     <span class="nav-icon">⚙️</span>
     <span>Jours</span>
   </button>
   <button class="nav-btn" onclick="switchTab('plan', this)">
-    <span class="nav-icon">📖</span>
+    <span class="nav-icon">📅</span>
     <span>Planning</span>
   </button>
   <button class="nav-btn" onclick="switchTab('shopping', this)">
@@ -171,27 +216,31 @@ const DEFAULT_PANTRY = [
   { id: "riz", name: "Riz complet" },
   { id: "avocat", name: "Avocat" },
   { id: "avoine", name: "Flocons d'avoine" },
-  { id: "banane", name: "Banane" }
+  { id: "banane", name: "Banane" },
+  { id: "soupe", name: "Soupe de légumes" },
+  { id: "gaspacho", name: "Gaspacho" }
 ];
 
-// Images Unsplash exactes et vérifiées pour chaque plat
-const RECIPES = {
+const DEFAULT_RECIPES = {
   matin: [
-    { id: "m1", name: "Porridge Avoine & Banane", cal: "~310 kcal", macros: ["Prot 12g", "Gluc 45g"], ingredients: [{ id: "avoine", qty: 40, unit: "g" }, { id: "banane", qty: 1, unit: "u" }], img: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=300&q=80", prep: "Cuire 40g d'avoine avec eau/lait végétal. Ajouter la banane en rondelles." },
-    { id: "m2", name: "Toast Avocat & Graines", cal: "~290 kcal", macros: ["Prot 8g", "Lip 14g"], ingredients: [{ id: "avocat", qty: 0.5, unit: "u" }], img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=300&q=80", prep: "Écraser 1/2 avocat sur du pain complet. Citronner et poivrer." }
+    { id: "m1", name: "Porridge Avoine & Banane", cal: "~310 kcal", macros: ["Prot 12g", "Gluc 45g"], ingredients: [{ id: "avoine", qty: 40, unit: "g" }, { id: "banane", qty: 1, unit: "u" }], img: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=300&q=80", prep: "Cuire 40g d'avoine avec du lait végétal. Ajouter la banane." },
+    { id: "m2", name: "Toast Avocat & Graines", cal: "~290 kcal", macros: ["Prot 8g", "Lip 14g"], ingredients: [{ id: "avocat", qty: 0.5, unit: "u" }], img: "https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=300&q=80", prep: "Écraser 1/2 avocat sur du pain complet." }
   ],
   midi: [
-    { id: "l1", name: "Bowl Épinards & Pois Chiches", cal: "~380 kcal", macros: ["Prot 18g", "Fibres 10g"], ingredients: [{ id: "epinards", qty: 80, unit: "g" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }, { id: "avocat", qty: 0.5, unit: "u" }], img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80", prep: "Assembler épinards frais, 1/2 boîte de pois chiches rincés et 1/2 avocat." },
-    { id: "l2", name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", macros: ["Prot 22g", "Gluc 40g"], ingredients: [{ id: "tofu", qty: 120, unit: "g" }, { id: "aubergine", qty: 0.5, unit: "u" }, { id: "riz", qty: 60, unit: "g" }], img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80", prep: "Saisir tofu et aubergine avec sauce soja. Servir avec le riz." }
+    { id: "l1", name: "Bowl Épinards & Pois Chiches", cal: "~380 kcal", macros: ["Prot 18g", "Fibres 10g"], ingredients: [{ id: "epinards", qty: 80, unit: "g" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }, { id: "avocat", qty: 0.5, unit: "u" }], img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80", prep: "Mélanger épinards frais, pois chiches et 1/2 avocat." },
+    { id: "l2", name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", macros: ["Prot 22g", "Gluc 40g"], ingredients: [{ id: "tofu", qty: 120, unit: "g" }, { id: "aubergine", qty: 0.5, unit: "u" }, { id: "riz", qty: 60, unit: "g" }], img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80", prep: "Saisir le tofu et l'aubergine. Déguster avec le riz." },
+    { id: "l_gaspacho", name: "Gaspacho & Wrap Végétal", cal: "~320 kcal", macros: ["Prot 10g", "Fibres 6g"], ingredients: [{ id: "gaspacho", qty: 250, unit: "ml" }], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80", prep: "Servir un bol de gaspacho frais avec un wrap garni." }
   ],
   soir: [
-    { id: "d1", name: "Curry Lentilles & Épinards", cal: "~350 kcal", macros: ["Prot 20g", "Fibres 11g"], ingredients: [{ id: "lentilles", qty: 0.5, unit: "boîte" }, { id: "epinards", qty: 100, unit: "g" }], img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=300&q=80", prep: "Mijoter lentilles et épinards avec coulis de tomate et curry." },
-    { id: "d2", name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", macros: ["Prot 15g", "Fibres 9g"], ingredients: [{ id: "aubergine", qty: 0.5, unit: "u" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80", prep: "Griller 1/2 aubergine avec 1/2 boîte de pois chiches à la poêle." }
+    { id: "d1", name: "Curry Lentilles & Épinards", cal: "~350 kcal", macros: ["Prot 20g", "Fibres 11g"], ingredients: [{ id: "lentilles", qty: 0.5, unit: "boîte" }, { id: "epinards", qty: 100, unit: "g" }], img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=300&q=80", prep: "Mijoter les lentilles et épinards avec curry." },
+    { id: "d2", name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", macros: ["Prot 15g", "Fibres 9g"], ingredients: [{ id: "aubergine", qty: 0.5, unit: "u" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80", prep: "Griller l'aubergine et les pois chiches à la poêle." },
+    { id: "d_soupe", name: "Soupe de Légumes & Toast", cal: "~280 kcal", macros: ["Prot 9g", "Fibres 8g"], ingredients: [{ id: "soupe", qty: 300, unit: "ml" }], img: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=300&q=80", prep: "Réchauffer la soupe et accompagner d'un toast chaud." }
   ]
 };
 
 let pantryItems = JSON.parse(localStorage.getItem('pantryItems')) || DEFAULT_PANTRY;
 let selectedPantry = JSON.parse(localStorage.getItem('selectedPantry')) || {};
+let recipes = JSON.parse(localStorage.getItem('recipes')) || DEFAULT_RECIPES;
 let daysConfig = JSON.parse(localStorage.getItem('daysConfig')) || DAYS.map(day => ({
   name: day, enabled: true, mode: "teletravail", meals: { matin: true, midi: true, soir: true }
 }));
@@ -199,34 +248,53 @@ let manualShopItems = JSON.parse(localStorage.getItem('manualShopItems')) || [];
 let checkedShopItems = JSON.parse(localStorage.getItem('checkedShopItems')) || {};
 let recipeReviews = JSON.parse(localStorage.getItem('recipeReviews')) || {};
 let favorites = JSON.parse(localStorage.getItem('favorites')) || {};
+let customPlan = JSON.parse(localStorage.getItem('customPlan')) || null;
 let isPlanGenerated = JSON.parse(localStorage.getItem('isPlanGenerated')) || false;
 
 function saveData() {
   localStorage.setItem('pantryItems', JSON.stringify(pantryItems));
   localStorage.setItem('selectedPantry', JSON.stringify(selectedPantry));
+  localStorage.setItem('recipes', JSON.stringify(recipes));
   localStorage.setItem('daysConfig', JSON.stringify(daysConfig));
   localStorage.setItem('manualShopItems', JSON.stringify(manualShopItems));
   localStorage.setItem('checkedShopItems', JSON.stringify(checkedShopItems));
   localStorage.setItem('recipeReviews', JSON.stringify(recipeReviews));
   localStorage.setItem('favorites', JSON.stringify(favorites));
+  localStorage.setItem('customPlan', JSON.stringify(customPlan));
   localStorage.setItem('isPlanGenerated', JSON.stringify(isPlanGenerated));
 }
 
+// Sélection intelligente basée sur frigo et notes
+function pickBestRecipe(type, dayIdx, offset = 0) {
+  let list = [...(recipes[type] || [])];
+  
+  // Prioriser recettes qui utilisent les éléments du frigo
+  list.sort((a, b) => {
+    let scoreA = (recipeReviews[a.id]?.rating || 3) + (a.ingredients?.some(i => selectedPantry[i.id]) ? 2 : 0);
+    let scoreB = (recipeReviews[b.id]?.rating || 3) + (b.ingredients?.some(i => selectedPantry[i.id]) ? 2 : 0);
+    return scoreB - scoreA;
+  });
+
+  return list[(dayIdx + offset) % list.length];
+}
+
 function getCalculatedPlan() {
+  if (customPlan) return customPlan;
+
   let computedDays = [];
   daysConfig.forEach((d, idx) => {
     if (!d.enabled) return;
     let dayPlan = { name: d.name, mode: d.mode, meals: {} };
     
-    if (d.meals.matin) dayPlan.meals.matin = { ...RECIPES.matin[idx % RECIPES.matin.length] };
-    if (d.meals.soir) dayPlan.meals.soir = { ...RECIPES.soir[idx % RECIPES.soir.length] };
+    if (d.meals.matin) dayPlan.meals.matin = { ...pickBestRecipe('matin', idx) };
+    if (d.meals.soir) dayPlan.meals.soir = { ...pickBestRecipe('soir', idx) };
 
     if (d.meals.midi) {
       if (d.mode === 'bureau' && idx > 0 && computedDays[computedDays.length - 1]?.meals?.soir) {
         const prevDinner = computedDays[computedDays.length - 1].meals.soir;
         dayPlan.meals.midi = { ...prevDinner, name: `[Restes] ${prevDinner.name}`, isLeftover: true };
       } else {
-        dayPlan.meals.midi = { ...RECIPES.midi[idx % RECIPES.midi.length] };
+        dayPlan.meals.midi = { ...pickBestRecipe('midi', idx) };
       }
     }
     computedDays.push(dayPlan);
@@ -238,11 +306,11 @@ function renderHome() {
   const container = document.getElementById('nextMealContainer');
   if (!isPlanGenerated) {
     container.innerHTML = `
-      <div class="card" style="text-align:center; padding: 20px;">
+      <div class="card" style="text-align:center; padding:20px;">
         <div style="font-size:30px; margin-bottom:6px;">🍽️</div>
         <div class="card-title" style="justify-content:center;">Aucun planning</div>
-        <div class="card-subtitle">Configure ta semaine pour obtenir tes repas.</div>
-        <button class="btn" onclick="switchTab('config', document.querySelectorAll('.nav-btn')[2])">Générer le planning →</button>
+        <div class="card-subtitle">Génère tes repas selon ton frigo et tes goûts.</div>
+        <button class="btn" onclick="switchTab('config', document.querySelectorAll('.nav-btn')[3])">Configurer mon planning →</button>
       </div>`;
     return;
   }
@@ -259,58 +327,142 @@ function renderHome() {
     container.innerHTML = `
       <div class="card">
         <div class="card-title">Aujourd'hui (${DAYS[todayIdx]})</div>
-        <div class="card-subtitle">Aucun repas prévu pour ce créneau.</div>
-        <button class="btn" onclick="switchTab('plan', document.querySelectorAll('.nav-btn')[3])">Voir le planning 📖</button>
+        <div class="card-subtitle">Aucun repas prévu à ce créneau.</div>
+        <button class="btn" onclick="switchTab('plan', document.querySelectorAll('.nav-btn')[4])">Voir tout le planning 📖</button>
       </div>`;
     return;
   }
 
   container.innerHTML = `
     <div class="card-title" style="margin-bottom:8px;">Prochain repas (${DAYS[todayIdx]}) 🎯</div>
-    ${renderMealCardHTML(recipe, targetType, true)}`;
+    ${renderMealCardHTML(recipe, targetType, DAYS[todayIdx], true)}`;
 }
 
-function renderMealCardHTML(recipe, type, showDetails = false) {
+function renderMealCardHTML(recipe, type, dayName, showDetails = false) {
   const isFav = favorites[recipe.id];
   const review = recipeReviews[recipe.id] || { rating: 0, text: '' };
   const cardId = 'rec_' + Math.random().toString(36).substr(2, 5);
 
   return `
-    <div class="meal-card" style="${showDetails ? 'flex-direction:column; align-items:stretch;' : ''}">
-      <div style="display:flex; align-items:center; gap:10px; width:100%;">
-        <img src="${recipe.img}" class="meal-img" alt="${recipe.name}">
-        <div class="meal-content">
+    <div class="meal-card">
+      <div class="meal-top">
+        <img src="${recipe.img || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80'}" class="meal-img" alt="${recipe.name}">
+        <div class="meal-info">
           <div class="meal-header">
-            <span class="meal-type">${type} ${recipe.isLeftover ? '• 🍱 Gamelle' : ''}</span>
-            <button class="fav-btn" onclick="toggleFav('${recipe.id}')">${isFav ? '❤️' : '🤍'}</button>
+            <span class="meal-type">${type} ${recipe.isLeftover ? '• 🍱 Restes' : ''}</span>
+            <div class="meal-actions">
+              <button class="icon-btn" onclick="toggleFav('${recipe.id}')">${isFav ? '❤️' : '🤍'}</button>
+              ${dayName ? `
+                <button class="icon-btn" title="Changer" onclick="regenerateMeal('${dayName}', '${type}')">🔄</button>
+                <button class="icon-btn" title="Supprimer" onclick="removeMeal('${dayName}', '${type}')">🗑️</button>
+              ` : ''}
+            </div>
           </div>
           <div class="meal-name">${recipe.name}</div>
-          <div style="font-size:11px; color:var(--text-muted);">${recipe.cal}</div>
+          <div style="font-size:10px; color:var(--text-muted);">${recipe.cal}</div>
           <div class="nutri-badges">
             ${recipe.macros ? recipe.macros.map(m => `<span class="badge">${m}</span>`).join('') : ''}
           </div>
         </div>
       </div>
       
-      <button class="btn" style="padding:4px 8px; font-size:11px; margin-top:6px; background:var(--bg); color:var(--text); box-shadow:none; border:1px solid var(--border);" onclick="toggleRecipe('${cardId}')">Recette & Notes ▾</button>
+      <div class="meal-bottom-btns">
+        <button class="toggle-btn" onclick="toggleRecipe('${cardId}')">Recette & Notes ▾</button>
+      </div>
 
       <div class="recipe-details ${showDetails ? 'open' : ''}" id="${cardId}">
-        <div style="font-size:11px; margin-bottom:6px;">
-          ${recipe.isLeftover ? '<strong>💡 Restes :</strong> Réchauffe la portion de la veille.' : `<strong>Préparation :</strong> ${recipe.prep}`}
+        <div style="margin-bottom:4px;">
+          ${recipe.isLeftover ? '<strong>💡 Conseil :</strong> Portion préparée la veille au soir.' : `<strong>Préparation :</strong> ${recipe.prep}`}
         </div>
         <div class="review-box">
-          <strong style="font-size:11px;">Avis :</strong>
+          <strong>Avis :</strong>
           <div class="stars">
             ${[1,2,3,4,5].map(star => `
               <span class="star ${review.rating >= star ? 'active' : ''}" onclick="rateRecipe('${recipe.id}', ${star})">★</span>
             `).join('')}
           </div>
-          <input type="text" class="review-input" placeholder="Note ou remarque..." value="${review.text || ''}" onchange="saveReviewText('${recipe.id}', this.value)">
+          <input type="text" class="review-input" placeholder="Notes ou améliorations..." value="${review.text || ''}" onchange="saveReviewText('${recipe.id}', this.value)">
         </div>
       </div>
     </div>`;
 }
 
+// Actions Planning (Régénérer / Supprimer)
+function regenerateMeal(dayName, type) {
+  if (!customPlan) customPlan = getCalculatedPlan();
+  let dayObj = customPlan.find(d => d.name === dayName);
+  if (dayObj) {
+    let offset = Math.floor(Math.random() * 5) + 1;
+    dayObj.meals[type] = { ...pickBestRecipe(type, 0, offset) };
+    saveData();
+    renderHome();
+    renderPlan();
+    renderShopping();
+  }
+}
+
+function removeMeal(dayName, type) {
+  if (!customPlan) customPlan = getCalculatedPlan();
+  let dayObj = customPlan.find(d => d.name === dayName);
+  if (dayObj && dayObj.meals[type]) {
+    delete dayObj.meals[type];
+    saveData();
+    renderHome();
+    renderPlan();
+    renderShopping();
+  }
+}
+
+// Ajout Recette Personnelle
+function addNewRecipe() {
+  const name = document.getElementById('newRecName').value.trim();
+  const type = document.getElementById('newRecType').value;
+  const cal = document.getElementById('newRecCal').value.trim() || '~350 kcal';
+  const ingsStr = document.getElementById('newRecIngs').value.trim();
+  const prep = document.getElementById('newRecPrep').value.trim() || 'Recette maison.';
+
+  if (!name) return alert('Entre au moins le nom du plat.');
+
+  const ingList = ingsStr.split(',').map(i => ({ id: i.trim().toLowerCase().replace(/ /g, '_'), qty: 1, unit: 'portion' }));
+  
+  const newRec = {
+    id: 'custom_rec_' + Date.now(),
+    name: name,
+    cal: cal,
+    macros: ["Recette Perso"],
+    ingredients: ingList,
+    img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=300&q=80",
+    prep: prep
+  };
+
+  recipes[type].push(newRec);
+  saveData();
+  renderRecipeDirectory();
+  alert('Recette ajoutée à ton carnet !');
+
+  document.getElementById('newRecName').value = '';
+  document.getElementById('newRecIngs').value = '';
+  document.getElementById('newRecPrep').value = '';
+}
+
+function renderRecipeDirectory() {
+  const container = document.getElementById('recipeDirectory');
+  let html = '';
+  ['matin', 'midi', 'soir'].forEach(t => {
+    html += `<div style="font-weight:700; font-size:12px; color:var(--accent); text-transform:uppercase; margin:8px 0 4px;">${t}</div>`;
+    recipes[t].forEach(r => {
+      const review = recipeReviews[r.id] || { rating: 0 };
+      html += `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid var(--border); font-size:12px;">
+          <span>${r.name}</span>
+          <span style="color:var(--star);">${'★'.repeat(review.rating) || 'Non notée'}</span>
+        </div>`;
+    });
+  });
+  container.innerHTML = html;
+}
+
+// Frigo & Ingrédients
 function renderPantry() {
   const grid = document.getElementById('pantryGrid');
   grid.innerHTML = pantryItems.map(item => `
@@ -325,7 +477,7 @@ function addCustomIngredient() {
   const input = document.getElementById('customIngredient');
   const val = input.value.trim();
   if(!val) return;
-  const id = 'custom_' + Date.now();
+  const id = val.toLowerCase().replace(/ /g, '_');
   pantryItems.push({ id, name: val });
   selectedPantry[id] = true;
   input.value = '';
@@ -334,24 +486,25 @@ function addCustomIngredient() {
   renderShopping();
 }
 
+// Config
 function renderDaysConfig() {
   const container = document.getElementById('daysConfigContainer');
   container.innerHTML = daysConfig.map((d, idx) => `
-    <div class="day-config">
-      <div class="day-head">
+    <div style="border-bottom:1px solid var(--border); padding-bottom:8px; margin-bottom:8px;">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
         <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
           <input type="checkbox" ${d.enabled ? 'checked' : ''} onchange="toggleDay(${idx})" style="accent-color:var(--accent);">
-          <span class="day-title">${d.name}</span>
+          <span style="font-weight:700; font-size:13px;">${d.name}</span>
         </label>
         ${d.enabled ? `
-          <select class="mode-select" onchange="changeDayMode(${idx}, this.value)">
+          <select style="font-size:10px; padding:3px; border-radius:6px; border:1px solid var(--border);" onchange="changeDayMode(${idx}, this.value)">
             <option value="teletravail" ${d.mode === 'teletravail' ? 'selected' : ''}>🏡 Télétravail</option>
             <option value="bureau" ${d.mode === 'bureau' ? 'selected' : ''}>💼 Bureau (Gamelle)</option>
             <option value="maison" ${d.mode === 'maison' ? 'selected' : ''}>🌴 Maison</option>
           </select>` : ''}
       </div>
       ${d.enabled ? `
-        <div class="meal-checks">
+        <div style="display:flex; gap:4px; margin-top:4px;">
           <div class="meal-check ${d.meals.matin ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'matin')">Matin</div>
           <div class="meal-check ${d.meals.midi ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'midi')">Midi</div>
           <div class="meal-check ${d.meals.soir ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'soir')">Soir</div>
@@ -364,6 +517,7 @@ function changeDayMode(idx, mode) { daysConfig[idx].mode = mode; saveData(); }
 function toggleDayMeal(idx, meal) { daysConfig[idx].meals[meal] = !daysConfig[idx].meals[meal]; saveData(); renderDaysConfig(); }
 
 function generateAndShowPlan() {
+  customPlan = null;
   isPlanGenerated = true;
   saveData();
   renderHome();
@@ -383,14 +537,14 @@ function renderPlan() {
 
   container.innerHTML = plan.map(d => `
     <div class="card">
-      <div class="card-title">${d.name} <span style="font-size:11px; color:var(--text-muted); font-weight:normal;">${d.mode === 'bureau' ? '💼 Gamelle' : '🏡 Maison'}</span></div>
-      ${Object.keys(d.meals).map(mType => renderMealCardHTML(d.meals[mType], mType)).join('')}
+      <div class="card-title">${d.name} <span style="font-size:10px; color:var(--text-muted); font-weight:normal;">${d.mode === 'bureau' ? '💼 Gamelle' : '🏡 Maison'}</span></div>
+      ${Object.keys(d.meals).map(mType => renderMealCardHTML(d.meals[mType], mType, d.name)).join('')}
     </div>`).join('');
 }
 
 function toggleRecipe(id) { document.getElementById(id).classList.toggle('open'); }
 function toggleFav(id) { favorites[id] = !favorites[id]; saveData(); renderHome(); renderPlan(); }
-function rateRecipe(id, rating) { if(!recipeReviews[id]) recipeReviews[id] = {}; recipeReviews[id].rating = rating; saveData(); renderHome(); renderPlan(); }
+function rateRecipe(id, rating) { if(!recipeReviews[id]) recipeReviews[id] = {}; recipeReviews[id].rating = rating; saveData(); renderHome(); renderPlan(); renderRecipeDirectory(); }
 function saveReviewText(id, text) { if(!recipeReviews[id]) recipeReviews[id] = {}; recipeReviews[id].text = text; saveData(); }
 
 function renderShopping() {
@@ -424,7 +578,7 @@ function renderShopping() {
   });
 
   if (itemsToBuy.length === 0) {
-    container.innerHTML = `<div style="text-align:center; padding:15px; font-size:12px; color:var(--text-muted);">Frigo complet ! 🎉</div>`;
+    container.innerHTML = `<div style="text-align:center; padding:15px; font-size:11px; color:var(--text-muted);">Frigo complet ! 🎉</div>`;
     return;
   }
 
@@ -461,6 +615,7 @@ function switchTab(id, btn) {
 
 renderHome();
 renderPantry();
+renderRecipeDirectory();
 renderDaysConfig();
 renderPlan();
 renderShopping();
