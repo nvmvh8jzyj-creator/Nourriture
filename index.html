@@ -64,6 +64,13 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 .meal-name { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
 .fav-btn { background: none; border: none; font-size: 20px; cursor: pointer; }
 
+/* Badges de Nutriments */
+.nutri-badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0; }
+.badge { font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 6px; text-transform: uppercase; }
+.badge-p { background: #e2e8f0; color: #2d3748; } /* Protéines */
+.badge-c { background: #feebc8; color: #744210; } /* Féculents/Glucides */
+.badge-f { background: #c6f6d5; color: #22543d; } /* Fibres/Légumes */
+
 .recipe-details { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--border); font-size: 13px; line-height: 1.5; }
 .recipe-details.open { display: block; }
 
@@ -73,8 +80,10 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 .star.active { color: var(--star); }
 .review-input { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 8px; font-size: 12px; margin-top: 6px; }
 
-.shop-item { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.shop-item { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); cursor: pointer; }
+.shop-item-left { display: flex; align-items: center; gap: 12px; }
 .shop-item.checked span { text-decoration: line-through; opacity: 0.4; }
+.shop-qty { font-size: 12px; font-weight: 700; color: var(--accent); background: var(--accent-light); padding: 2px 8px; border-radius: 8px; }
 .checkbox { width: 22px; height: 22px; border-radius: 7px; border: 2px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
 .shop-item.checked .checkbox { background: var(--accent); border-color: var(--accent); color: white; }
 
@@ -85,15 +94,15 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
 
 <header>
   <h1>🥗 Meal Prep Vegan</h1>
-  <p>Déficit calorique · Anti-gaspillage</p>
+  <p>Déficit calorique · Restes optimisés · Équilibré</p>
 </header>
 
-<!-- SECTION ACCUEIL : PROCHAIN REPAS -->
+<!-- ACCUEIL : PROCHAIN REPAS -->
 <div id="home" class="section active">
   <div id="nextMealContainer"></div>
 </div>
 
-<!-- SECTION FRIGO -->
+<!-- FRIGO -->
 <div id="pantry" class="section">
   <div class="card">
     <div class="card-title">Dans mon frigo / placard 🥑</div>
@@ -106,26 +115,26 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   </div>
 </div>
 
-<!-- SECTION CONFIGURATION JOURS -->
+<!-- CONFIGURATION -->
 <div id="config" class="section">
   <div class="card">
     <div class="card-title">Organisation de la semaine 📅</div>
-    <div class="card-subtitle">Choisis tes jours et le type de repas.</div>
+    <div class="card-subtitle">En mode "Bureau (Gamelle)", le midi réutilise le dîner de la veille !</div>
     <div id="daysConfigContainer"></div>
   </div>
-  <button class="btn" onclick="generateAndShowPlan()">Générer / Mettre à jour ✨</button>
+  <button class="btn" onclick="generateAndShowPlan()">Générer mon planning ✨</button>
 </div>
 
-<!-- SECTION PLANNING COMPLET -->
+<!-- PLANNING -->
 <div id="plan" class="section">
   <div id="planContainer"></div>
 </div>
 
-<!-- SECTION COURSES -->
+<!-- COURSES -->
 <div id="shopping" class="section">
   <div class="card">
     <div class="card-title">Acheter pour la semaine 🛒</div>
-    <div class="card-subtitle">Coche au fur et à mesure.</div>
+    <div class="card-subtitle">Quantités estimées pour l'ensemble des repas.</div>
     <div class="input-group" style="margin-bottom: 16px;">
       <input type="text" id="customShopItem" placeholder="Ajouter un produit (ex: café)...">
       <button class="btn-add" onclick="addManualShopItem()">+</button>
@@ -134,7 +143,7 @@ header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
   </div>
 </div>
 
-<!-- NAVIGATION BAS -->
+<!-- NAVIGATION -->
 <div class="bottom-nav">
   <button class="nav-btn active" onclick="switchTab('home', this)">
     <span class="nav-icon">✨</span>
@@ -175,16 +184,16 @@ const DEFAULT_PANTRY = [
 
 const RECIPES = {
   matin: [
-    { id: "m1", name: "Porridge Avoine & Banane", cal: "~310 kcal", needs: ["avoine", "banane"], img: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=600&q=80", prep: "Cuire 40g d'avoine avec eau ou lait végétal. Servir avec la banane coupée." },
-    { id: "m2", name: "Toast Avocat & Graines", cal: "~290 kcal", needs: ["avocat"], img: "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=600&q=80", prep: "Écraser 1/2 avocat sur du pain complet grillé. Ajouter sel, poivre et jus de citron." }
+    { id: "m1", name: "Porridge Avoine & Banane", cal: "~310 kcal", macros: ["Protéines 12g", "Glucides 45g", "Fibres 7g"], ingredients: [{ id: "avoine", qty: 40, unit: "g" }, { id: "banane", qty: 1, unit: "unité" }], img: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?auto=format&fit=crop&w=600&q=80", prep: "Cuire 40g d'avoine dans de l'eau ou du lait végétal. Découper la banane en rondelles." },
+    { id: "m2", name: "Toast Avocat & Graines", cal: "~290 kcal", macros: ["Protéines 8g", "Bons Lipides 14g", "Fibres 6g"], ingredients: [{ id: "avocat", qty: 0.5, unit: "unité" }], img: "https://images.unsplash.com/photo-1588137378633-dea1336ce1e2?auto=format&fit=crop&w=600&q=80", prep: "Écraser 1/2 avocat sur une tranche de pain complet grillée. Citronner et poivrer." }
   ],
   midi: [
-    { id: "l1", name: "Bowl Épinards & Pois Chiches", cal: "~380 kcal", needs: ["epinards", "pois_chiches", "avocat"], img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80", prep: "Associer épinards frais, 1/2 boîte de pois chiches rincés et 1/2 avocat." },
-    { id: "l2", name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", needs: ["tofu", "aubergine", "riz"], img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80", prep: "Saisir tofu et dés d'aubergine avec de la sauce soja. Déguster avec le riz." }
+    { id: "l1", name: "Bowl Épinards & Pois Chiches", cal: "~380 kcal", macros: ["Protéines 18g", "Glucides 35g", "Fibres 10g"], ingredients: [{ id: "epinards", qty: 80, unit: "g" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }, { id: "avocat", qty: 0.5, unit: "unité" }], img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80", prep: "Mélanger épinards frais, 1/2 boîte de pois chiches rincés et 1/2 avocat." },
+    { id: "l2", name: "Sauté Tofu, Aubergine & Riz", cal: "~410 kcal", macros: ["Protéines 22g", "Glucides 40g", "Fibres 8g"], ingredients: [{ id: "tofu", qty: 120, unit: "g" }, { id: "aubergine", qty: 0.5, unit: "unité" }, { id: "riz", qty: 60, unit: "g" }], img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80", prep: "Saisir le tofu et les dés d'aubergine avec de la sauce soja. Servir avec le riz." }
   ],
   soir: [
-    { id: "d1", name: "Curry de Lentilles & Épinards", cal: "~350 kcal", needs: ["lentilles", "epinards"], img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80", prep: "Mijoter lentilles et épinards avec de la sauce tomate et du curry." },
-    { id: "d2", name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", needs: ["aubergine", "pois_chiches"], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80", prep: "Griller l'autre moitié de l'aubergine avec le reste des pois chiches." }
+    { id: "d1", name: "Curry de Lentilles & Épinards", cal: "~350 kcal", macros: ["Protéines 20g", "Glucides 38g", "Fibres 11g"], ingredients: [{ id: "lentilles", qty: 0.5, unit: "boîte" }, { id: "epinards", qty: 100, unit: "g" }], img: "https://images.unsplash.com/photo-1543339308-43e59d6b73a6?auto=format&fit=crop&w=600&q=80", prep: "Mijoter les lentilles et épinards avec un coulis de tomate et des épices curry." },
+    { id: "d2", name: "Poêlée Aubergine & Pois Chiches", cal: "~320 kcal", macros: ["Protéines 15g", "Glucides 32g", "Fibres 9g"], ingredients: [{ id: "aubergine", qty: 0.5, unit: "unité" }, { id: "pois_chiches", qty: 0.5, unit: "boîte" }], img: "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80", prep: "Saisir la 2nde moitié d'aubergine avec le reste de pois chiches à la poêle." }
   ]
 };
 
@@ -211,66 +220,109 @@ function saveData() {
   localStorage.setItem('isPlanGenerated', JSON.stringify(isPlanGenerated));
 }
 
-// 1. Prochain Repas (Accueil)
+// Calcul du planning avec gestion des restes
+function getCalculatedPlan() {
+  let computedDays = [];
+  
+  daysConfig.forEach((d, idx) => {
+    if (!d.enabled) return;
+    
+    let dayPlan = { name: d.name, mode: d.mode, meals: {} };
+    
+    // Matin
+    if (d.meals.matin) {
+      dayPlan.meals.matin = { ...RECIPES.matin[idx % RECIPES.matin.length] };
+    }
+    
+    // Soir
+    if (d.meals.soir) {
+      dayPlan.meals.soir = { ...RECIPES.soir[idx % RECIPES.soir.length] };
+    }
+
+    // Midi (Restes si Gamelle / Bureau)
+    if (d.meals.midi) {
+      if (d.mode === 'bureau' && idx > 0 && computedDays[computedDays.length - 1]?.meals?.soir) {
+        // Gamelle = Restes du soir précédent !
+        const prevDinner = computedDays[computedDays.length - 1].meals.soir;
+        dayPlan.meals.midi = {
+          ...prevDinner,
+          name: `[Restes] ${prevDinner.name}`,
+          isLeftover: true
+        };
+      } else {
+        dayPlan.meals.midi = { ...RECIPES.midi[idx % RECIPES.midi.length] };
+      }
+    }
+
+    computedDays.push(dayPlan);
+  });
+
+  return computedDays;
+}
+
+// Render Accueil
 function renderHome() {
   const container = document.getElementById('nextMealContainer');
-  
   if (!isPlanGenerated) {
     container.innerHTML = `
       <div class="card" style="text-align:center; padding: 30px 20px;">
         <div style="font-size:40px; margin-bottom:10px;">🍽️</div>
         <div class="card-title" style="justify-content:center;">Aucun planning généré</div>
-        <div class="card-subtitle">Organise tes repas de la semaine en quelques clics.</div>
+        <div class="card-subtitle">Configure ta semaine pour obtenir tes recettes.</div>
         <button class="btn" onclick="switchTab('config', document.querySelectorAll('.nav-btn')[2])">Générer mon planning →</button>
-      </div>
-    `;
+      </div>`;
     return;
   }
 
-  // Trouver le jour actuel
-  const todayIdx = (new Date().getDay() + 6) % 7; // Convertir Dimanche=0 en Lundi=0
+  const todayIdx = (new Date().getDay() + 6) % 7;
   const currentHour = new Date().getHours();
-  
-  let targetType = 'matin';
-  if (currentHour >= 10 && currentHour < 15) targetType = 'midi';
-  else if (currentHour >= 15) targetType = 'soir';
+  let targetType = currentHour < 10 ? 'matin' : (currentHour < 15 ? 'midi' : 'soir');
 
-  const dayData = daysConfig[todayIdx];
-  
-  if (!dayData || !dayData.enabled) {
+  const plan = getCalculatedPlan();
+  const todayPlan = plan.find(p => p.name === DAYS[todayIdx]);
+  const recipe = todayPlan?.meals?.[targetType];
+
+  if (!recipe) {
     container.innerHTML = `
       <div class="card">
         <div class="card-title">Aujourd'hui (${DAYS[todayIdx]})</div>
-        <div class="card-subtitle">Pas de repas planifié pour aujourd'hui.</div>
+        <div class="card-subtitle">Aucun repas prévu pour ce créneau.</div>
         <button class="btn" onclick="switchTab('plan', document.querySelectorAll('.nav-btn')[3])">Voir tout le planning 📖</button>
-      </div>
-    `;
+      </div>`;
     return;
   }
 
-  const recipeList = RECIPES[targetType];
-  const recipe = recipeList[todayIdx % recipeList.length];
+  container.innerHTML = `
+    <div class="card-title" style="margin-bottom:12px;">Prochain repas (${DAYS[todayIdx]}) 🎯</div>
+    ${renderMealCardHTML(recipe, targetType, todayPlan.mode)}`;
+}
+
+// HTML d'une carte repas
+function renderMealCardHTML(recipe, type, mode) {
   const isFav = favorites[recipe.id];
   const review = recipeReviews[recipe.id] || { rating: 0, text: '' };
 
-  container.innerHTML = `
-    <div class="card-title" style="margin-bottom:12px;">Prochain repas (${DAYS[todayIdx]}) 🎯</div>
+  return `
     <div class="meal-card">
       <img src="${recipe.img}" class="meal-img" alt="${recipe.name}">
       <div class="meal-content">
         <div class="meal-header">
-          <span class="meal-type">${targetType} ${dayData.mode === 'bureau' && targetType === 'midi' ? '• 🍱 Gamelle' : ''}</span>
+          <span class="meal-type">${type} ${recipe.isLeftover ? '• 🍱 Gamelle (Restes)' : ''}</span>
           <button class="fav-btn" onclick="toggleFav('${recipe.id}')">${isFav ? '❤️' : '🤍'}</button>
         </div>
         <div class="meal-name">${recipe.name}</div>
         <div style="font-size:12px; color:var(--text-muted);">${recipe.cal}</div>
         
-        <div style="margin-top:12px; font-size:13px; line-height:1.5;">
-          <strong>Préparation :</strong><br>${recipe.prep}
+        <div class="nutri-badges">
+          ${recipe.macros ? recipe.macros.map(m => `<span class="badge badge-p">${m}</span>`).join('') : ''}
+        </div>
+
+        <div style="margin-top:10px; font-size:13px; line-height:1.5;">
+          ${recipe.isLeftover ? '<strong>💡 Conseil Restes :</strong> Réchauffe la portion préparée la veille au soir.' : `<strong>Préparation :</strong> ${recipe.prep}`}
         </div>
 
         <div class="review-box">
-          <strong>Ton avis sur ce plat :</strong>
+          <strong>Avis :</strong>
           <div class="stars">
             ${[1,2,3,4,5].map(star => `
               <span class="star ${review.rating >= star ? 'active' : ''}" onclick="rateRecipe('${recipe.id}', ${star})">★</span>
@@ -279,20 +331,17 @@ function renderHome() {
           <input type="text" class="review-input" placeholder="Remarques..." value="${review.text || ''}" onchange="saveReviewText('${recipe.id}', this.value)">
         </div>
       </div>
-    </div>
-    <button class="btn" style="background:var(--bg); color:var(--text); box-shadow:none; border:1px solid var(--border);" onclick="switchTab('plan', document.querySelectorAll('.nav-btn')[3])">Voir tout le planning 📖</button>
-  `;
+    </div>`;
 }
 
-// 2. Frigo
+// Frigo
 function renderPantry() {
   const grid = document.getElementById('pantryGrid');
   grid.innerHTML = pantryItems.map(item => `
     <div class="pantry-item ${selectedPantry[item.id] ? 'selected' : ''}" onclick="togglePantry('${item.id}')">
       <span>${item.name}</span>
       <span>${selectedPantry[item.id] ? '✓' : ''}</span>
-    </div>
-  `).join('');
+    </div>`).join('');
 }
 
 function togglePantry(id) {
@@ -315,7 +364,7 @@ function addCustomIngredient() {
   renderShopping();
 }
 
-// 3. Configuration Jours
+// Config
 function renderDaysConfig() {
   const container = document.getElementById('daysConfigContainer');
   container.innerHTML = daysConfig.map((d, idx) => `
@@ -330,18 +379,15 @@ function renderDaysConfig() {
             <option value="teletravail" ${d.mode === 'teletravail' ? 'selected' : ''}>🏡 Télétravail</option>
             <option value="bureau" ${d.mode === 'bureau' ? 'selected' : ''}>💼 Bureau (Gamelle)</option>
             <option value="maison" ${d.mode === 'maison' ? 'selected' : ''}>🌴 Maison</option>
-          </select>
-        ` : ''}
+          </select>` : ''}
       </div>
       ${d.enabled ? `
         <div class="meal-checks">
           <div class="meal-check ${d.meals.matin ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'matin')">Matin</div>
           <div class="meal-check ${d.meals.midi ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'midi')">Midi</div>
           <div class="meal-check ${d.meals.soir ? 'active' : ''}" onclick="toggleDayMeal(${idx}, 'soir')">Soir</div>
-        </div>
-      ` : ''}
-    </div>
-  `).join('');
+        </div>` : ''}
+    </div>`).join('');
 }
 
 function toggleDay(idx) { daysConfig[idx].enabled = !daysConfig[idx].enabled; saveData(); renderDaysConfig(); }
@@ -357,108 +403,64 @@ function generateAndShowPlan() {
   switchTab('home', document.querySelectorAll('.nav-btn')[0]);
 }
 
-// 4. Planning Complet
+// Planning
 function renderPlan() {
   const container = document.getElementById('planContainer');
-  let html = '';
+  const plan = getCalculatedPlan();
 
-  daysConfig.filter(d => d.enabled).forEach((d, dIdx) => {
-    html += `<div class="card"><div class="card-title">${d.name} <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">${d.mode === 'bureau' ? '💼 Gamelle' : '🏡 Maison'}</span></div>`;
-    
-    ['matin', 'midi', 'soir'].forEach(mType => {
-      if(d.meals[mType]) {
-        const recipeList = RECIPES[mType];
-        const recipe = recipeList[dIdx % recipeList.length];
-        const isFav = favorites[recipe.id];
-        const review = recipeReviews[recipe.id] || { rating: 0, text: '' };
+  if (plan.length === 0) {
+    container.innerHTML = `<div class="card"><div class="card-title">Aucun jour activé.</div></div>`;
+    return;
+  }
 
-        html += `
-          <div class="meal-card">
-            <img src="${recipe.img}" class="meal-img" alt="${recipe.name}">
-            <div class="meal-content">
-              <div class="meal-header">
-                <span class="meal-type">${mType} ${d.mode === 'bureau' && mType === 'midi' ? '• 🍱 Gamelle' : ''}</span>
-                <button class="fav-btn" onclick="toggleFav('${recipe.id}')">${isFav ? '❤️' : '🤍'}</button>
-              </div>
-              <div class="meal-name">${recipe.name}</div>
-              <div style="font-size:12px; color:var(--text-muted);">${recipe.cal}</div>
-              <button class="btn" style="padding:8px; font-size:12px; margin-top:8px; background:var(--bg); color:var(--text); box-shadow:none;" onclick="toggleRecipe('rec-${dIdx}-${mType}')">Recette & Notes ▾</button>
-              
-              <div class="recipe-details" id="rec-${dIdx}-${mType}">
-                <p><strong>Préparation :</strong> ${recipe.prep}</p>
-                <div class="review-box">
-                  <strong>Avis :</strong>
-                  <div class="stars">
-                    ${[1,2,3,4,5].map(star => `
-                      <span class="star ${review.rating >= star ? 'active' : ''}" onclick="rateRecipe('${recipe.id}', ${star})">★</span>
-                    `).join('')}
-                  </div>
-                  <input type="text" class="review-input" placeholder="Remarques..." value="${review.text || ''}" onchange="saveReviewText('${recipe.id}', this.value)">
-                </div>
-              </div>
-            </div>
-          </div>
-        `;
-      }
-    });
-
-    html += `</div>`;
-  });
-
-  container.innerHTML = html || `<div class="card"><div class="card-title">Aucun jour sélectionné.</div></div>`;
+  container.innerHTML = plan.map(d => `
+    <div class="card">
+      <div class="card-title">${d.name} <span style="font-size:12px; color:var(--text-muted); font-weight:normal;">${d.mode === 'bureau' ? '💼 Gamelle' : '🏡 Maison'}</span></div>
+      ${Object.keys(d.meals).map(mType => renderMealCardHTML(d.meals[mType], mType, d.mode)).join('')}
+    </div>`).join('');
 }
 
-function toggleRecipe(id) { document.getElementById(id).classList.toggle('open'); }
+function toggleFav(id) { favorites[id] = !favorites[id]; saveData(); renderHome(); renderPlan(); }
+function rateRecipe(id, rating) { if(!recipeReviews[id]) recipeReviews[id] = {}; recipeReviews[id].rating = rating; saveData(); renderHome(); renderPlan(); }
+function saveReviewText(id, text) { if(!recipeReviews[id]) recipeReviews[id] = {}; recipeReviews[id].text = text; saveData(); }
 
-function toggleFav(id) {
-  favorites[id] = !favorites[id];
-  saveData();
-  renderHome();
-  renderPlan();
-}
-
-function rateRecipe(id, rating) {
-  if(!recipeReviews[id]) recipeReviews[id] = {};
-  recipeReviews[id].rating = rating;
-  saveData();
-  renderHome();
-  renderPlan();
-}
-
-function saveReviewText(id, text) {
-  if(!recipeReviews[id]) recipeReviews[id] = {};
-  recipeReviews[id].text = text;
-  saveData();
-}
-
-// 5. Liste de Courses
+// Courses avec calcul de Quantité
 function renderShopping() {
   const container = document.getElementById('shoppingList');
-  const needed = {};
+  const plan = getCalculatedPlan();
+  const quantities = {};
 
-  daysConfig.filter(d => d.enabled).forEach((d, dIdx) => {
-    ['matin', 'midi', 'soir'].forEach(mType => {
-      if(d.meals[mType]) {
-        const recipe = RECIPES[mType][dIdx % RECIPES[mType].length];
-        recipe.needs.forEach(req => {
-          if (!selectedPantry[req]) {
-            needed[req] = true;
+  plan.forEach(d => {
+    Object.keys(d.meals).forEach(mType => {
+      const meal = d.meals[mType];
+      // Si ce sont des restes, la quantité a déjà été comptabilisée dans le repas précédent
+      if (meal.isLeftover) return;
+
+      if (meal.ingredients) {
+        meal.ingredients.forEach(ing => {
+          if (!selectedPantry[ing.id]) {
+            if (!quantities[ing.id]) quantities[ing.id] = { qty: 0, unit: ing.unit };
+            quantities[ing.id].qty += ing.qty;
           }
         });
       }
     });
   });
 
-  let itemsToBuy = Object.keys(needed).map(k => {
+  let itemsToBuy = Object.keys(quantities).map(k => {
     const item = pantryItems.find(p => p.id === k);
-    return { id: k, name: item ? item.name : k };
+    return {
+      id: k,
+      name: item ? item.name : k,
+      displayQty: `${quantities[k].qty} ${quantities[k].unit}`
+    };
   });
 
   manualShopItems.forEach(item => {
-    itemsToBuy.push({ id: item.id, name: item.name });
+    itemsToBuy.push({ id: item.id, name: item.name, displayQty: "1" });
   });
 
-  if(itemsToBuy.length === 0) {
+  if (itemsToBuy.length === 0) {
     container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--text-muted);">Ton frigo contient déjà tout le nécessaire ! 🎉</div>`;
     return;
   }
@@ -467,19 +469,16 @@ function renderShopping() {
     const isChecked = checkedShopItems[item.id];
     return `
       <div class="shop-item ${isChecked ? 'checked' : ''}" onclick="toggleShopCheck('${item.id}')">
-        <div class="checkbox">${isChecked ? '✓' : ''}</div>
-        <span>${item.name}</span>
-      </div>
-    `;
+        <div class="shop-item-left">
+          <div class="checkbox">${isChecked ? '✓' : ''}</div>
+          <span>${item.name}</span>
+        </div>
+        <span class="shop-qty">${item.displayQty}</span>
+      </div>`;
   }).join('');
 }
 
-function toggleShopCheck(id) {
-  checkedShopItems[id] = !checkedShopItems[id];
-  saveData();
-  renderShopping();
-}
-
+function toggleShopCheck(id) { checkedShopItems[id] = !checkedShopItems[id]; saveData(); renderShopping(); }
 function addManualShopItem() {
   const input = document.getElementById('customShopItem');
   const val = input.value.trim();
@@ -490,7 +489,6 @@ function addManualShopItem() {
   renderShopping();
 }
 
-// Navigation
 function switchTab(id, btn) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
